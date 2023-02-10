@@ -29,7 +29,8 @@ void celcius()
 {
     for (int i = 0; i < 5; i++)
     {
-        cout << "Fahr\t" << "Celc\t";
+        cout << "Fahr\t"
+             << "Celc\t";
     }
     cout << "\n";
 
@@ -55,11 +56,14 @@ int main()
 
     cout << "===== Hypotenuse Calculation ===== \n";
     double sideA, sideB;
-    cout << "Side 1: ";
-    cin >> sideA;
-    cout << "Side 2: ";
-    cin >> sideB;
-    cout << "Hypotenuse: " << hypotenuse(sideA, sideB) << "\n\n";
+    for (int i = 0; i < 3; i++)
+    {
+        cout << "Side 1: ";
+        cin >> sideA;
+        cout << "Side 2: ";
+        cin >> sideB;
+        cout << "Hypotenuse: " << hypotenuse(sideA, sideB) << "\n\n";
+    }
 
     cout << "===== Temperature Table ===== \n";
     celcius();
