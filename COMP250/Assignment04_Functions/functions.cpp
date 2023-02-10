@@ -1,35 +1,68 @@
 // Joshua Valdez
 // Assignment 4: Functions
+#include <cmath>
 #include <iostream>
-#include <queue>
-using namespace std;
+using std::cin;
+using std::cout;
 
-// Part 1: Separating Digits
-// Write void function called splitDigits which prints each digit of an int separated by two spaces. It should take in and int parameter input.
-// Each digit can be found by calculating the integer remainder when integer input is divided by 10. (Use %)
-// Then you must actually reduce this input by dividing by 10.
-// In the main function: Print out the original value and then call your function to show its output
 void splitDigits(int input)
 {
-
-    while (input <= 0)
+    while (input < 100)
     {
-        output.push(input % 10);
+        cout << "Your input needs to be at least 3 digits long. \n";
+        cout << "Input integer: ";
+        cin >> input;
+    }
+    while (input > 0)
+    {
+        cout << input % 10 << " ";
         input = input / 10;
     }
+}
 
-    for (int i = 0; i < size(output); i++)
+double hypotenuse(double sideA, double sideB)
+{
+    return sqrt(pow(sideA, 2) + pow(sideB, 2));
+}
+
+void celcius()
+{
+    for (int i = 0; i < 5; i++)
     {
-        cout << output[i] << "\n";
+        cout << "Fahr\t" << "Celc\t";
+    }
+    cout << "\n";
+
+    for (int i = 32; i <= 212; i += 2)
+    {
+        cout << i << "\t";
+        cout << (i - 32) * 5 / 9 << "\t";
+        if (i % 10 == 0)
+            cout << "\n";
     }
 }
 
 int main()
 {
+    cout << "\n";
+
+    cout << "===== Separating Digits ===== \n";
     int input;
     cout << "Input integer: ";
     cin >> input;
+    splitDigits(input);
+    cout << "\n\n";
 
+    cout << "===== Hypotenuse Calculation ===== \n";
+    double sideA, sideB;
+    cout << "Side 1: ";
+    cin >> sideA;
+    cout << "Side 2: ";
+    cin >> sideB;
+    cout << "Hypotenuse: " << hypotenuse(sideA, sideB) << "\n\n";
+
+    cout << "===== Temperature Table ===== \n";
+    celcius();
 
     return 0;
 }
