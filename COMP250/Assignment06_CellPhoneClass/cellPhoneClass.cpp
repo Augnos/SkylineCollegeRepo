@@ -18,34 +18,39 @@ For each CellPhone object call the call and hangup functions.
 */
 
 class CellPhone {
-public:
-    void CellPhone(string, string, int);
-    void call();
-    void hangup();
-
 private:
     string model;
     string owner;
-    int phoneNumber;
+    string phoneNumber;
+
+public:
+    // constructor
+    CellPhone(string model, string owner, string phoneNumber){
+        this->model = model;
+        this->owner = owner;
+        this->phoneNumber = phoneNumber;
+    }
+
+
+    // methods
+    void call(){
+        cout << this->owner << " calling from " << this->phoneNumber << "\n";
+    };
+
+    void hangup(){
+        cout << "hanging up cell phone \n";
+    }
 };
-
-CellPhone::CellPhone(string m, string o, int p){
-
-
-}
-
-void CellPhone::call(){
-    // not sure if we are using "this" yet, but this is how I would use the class to recall owner and phone number of an instance.
-    cout << this->owner << " calling from " << this->phoneNumber;
-}
-
-void CellPhone::hangup(){
-    cout << "hanging up cell phone";
-}
 
 
 int main() {
-    CellPhone phone1()
+    CellPhone phone1("iPhone 14 Pro", "Josh", "(555)-123-4567");
+    CellPhone phone2("Samsung Galaxy S22", "Alex", "(555)-987-6543");
+
+    phone1.call();
+    phone1.hangup();
+    phone2.call();
+    phone2.hangup();
 
     return 0;
 }
