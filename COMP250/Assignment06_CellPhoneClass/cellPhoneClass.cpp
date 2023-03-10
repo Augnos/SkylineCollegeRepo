@@ -34,11 +34,11 @@ public:
 
     // methods
     void call(){
-        cout << this->owner << " calling from " << this->phoneNumber << "\n";
+        cout << this->owner << " calling from " << this->phoneNumber << "...\n";
     };
 
     void hangup(){
-        cout << "hanging up cell phone \n";
+        cout << "Hanging up cell phone. \n";
     }
 };
 
