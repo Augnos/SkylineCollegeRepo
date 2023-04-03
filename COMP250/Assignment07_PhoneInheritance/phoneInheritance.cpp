@@ -54,8 +54,6 @@ class FlipPhone : public CellPhone{
     public:
         // constructor
         FlipPhone(string owner, string phoneNumber) : CellPhone("FlipPhone", owner, phoneNumber){
-            this->owner = owner;
-            this->phoneNumber = phoneNumber;
         };
 
         // methods
@@ -72,9 +70,7 @@ class SmartPhone : public CellPhone{
     public:
         // constructor
         SmartPhone(string owner, string phoneNumber, string os, int memorySize) : CellPhone("SmartPhone", owner, phoneNumber){
-            this->owner = owner;
-            this->phoneNumber = phoneNumber;
-            this->os = os;
+            this->os = os;  // operating system
             this->memorySize = memorySize;
         };
 
