@@ -27,7 +27,7 @@ public:
         emailAddress = email;
     }
 
-    // getter methods
+    // getters/accessors
     string getName() const{
         return name;
     }
@@ -38,7 +38,7 @@ public:
         return phoneNumber;
     }
 
-    // setter methods
+    // setters/mutators
     void setName(string n){
         name = n;
     }
@@ -61,7 +61,7 @@ void ContactCard::print()
 
 bool ContactCard::operator==(const ContactCard &another) const
 {
-    return name == another.name && emailAddress == another.emailAddress;
+    return name == another.name && (emailAddress == another.emailAddress || phoneNumber == another.phoneNumber);
 }
 
 
@@ -86,58 +86,7 @@ that won't crash your program. A ContactCard should not be imported more than on
 contact is equal to (==) some other contact already in the array. Once imported you must loop through the array and
 print all the ContactCards.*/
 
-class FlipPhone : public CellPhone
-{
-  public:
-    // constructor
-    FlipPhone(string owner, string phoneNumber) : CellPhone("FlipPhone", owner, phoneNumber){};
-
-    // methods
-    void hangup()
-    {
-        cout << "Closing phone.\n\n";
-    }
-};
-
-class SmartPhone : public CellPhone
-{
-  private:
-    string os;
-    int memorySize;
-
-  public:
-    // constructor
-    SmartPhone(string owner, string phoneNumber, string os, int memorySize)
-        : CellPhone("SmartPhone", owner, phoneNumber)
-    {
-        this->os = os; // operating system
-        this->memorySize = memorySize;
-    };
-
-    // methods
-    void hangup()
-    {
-        cout << "Pressing END button.\n\n";
-    }
-};
-
 int main()
 {
-    // constructing CellPhone objects
-    FlipPhone flip1("Josh", "415-555-1111");
-    SmartPhone smart1("Jacob", "415-555-1234", "android", 8);
-    SmartPhone smart2("Celeste", "415-555-2345", "iOS", 64);
-    CellPhone cell1("Nokia", "Gabby", "415-555-4567");
-
-    // creating array of CellPhone pointers
-    CellPhone *ptrArr1[] = {&flip1, &smart1, &smart2, &cell1};
-
-    // for loop calling and hanging up each CellPhone in the pointer array
-    for (int i = 0; i < sizeof(ptrArr1) / sizeof(ptrArr1[0]); i++)
-    {
-        ptrArr1[i]->call();
-        ptrArr1[i]->hangup();
-    }
-
     return 0;
 }
