@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "*.py": "python",
-        "*.cshtml": "aspnetcorerazor",
-        "string": "cpp",
-        "ostream": "cpp"
-    }
-}

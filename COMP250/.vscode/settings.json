@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "*.py": "python",
-        "*.cshtml": "aspnetcorerazor",
-        "iosfwd": "cpp"
-    }
-}
