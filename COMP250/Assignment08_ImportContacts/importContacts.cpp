@@ -21,7 +21,7 @@ class ContactCard
     long phoneNumber;
 
   public:
-    // constructor
+    // constructors
     ContactCard();
     ContactCard(string name, long phone, string email = "unknown")
     {
@@ -106,27 +106,57 @@ print all the ContactCards.*/
 
 int main()
 {
-    ifstream inFile; // creates an object inFile of type ifstream
+    string tempData;             // to hold a single string value of a contact's data from .csv file
+    ContactCard tempContact;     // tempData stored here prior to being added to ContactList
+    ContactCard contactList[50]; // holds all our contact cards to be printed later
 
-    inFile.open("ContactData.csv");
-    string tempData;         // to hold a single value of a contact's data from .csv file
-    ContactCard tempContact(); // temp data stored here prior to being added to ContactList
-    string contactData[50];
     int counter = 0;
+    ifstream inFile;                // creates an object inFile of type ifstream
+    inFile.open("ContactData.csv"); // opens .csv
     while (getline(inFile, tempData, ','))
     {
-        contactData[counter] = trim(tempData);
-        counter++;
-        if (counter % 3 == 0)
+        // if/else statements add tempData to tempContact, using counter to determine which variable to store data under
+        if (counter == 0)
         {
-            for (int i = 0; i < 3; i++)
+            tempContact.setName(tempData);
+        }
+        else if (counter == 1)
+        {
+            tempContact.setEmailAddress(tempData);
+        }
+        else if (counter == 2)
+        {
+            try
             {
-                cout << i << " data element is " << contactData[i] << endl;
+                tempContact.setPhoneNumber(stol(tempData));
             }
-            counter = 0;
+            catch (...)
+            {
+                cout << "Phone number not valid\n" << tempData << " could not be stored.\n";
+            }
+        }
+        counter++;
+
+        // when a tempContact is completely filled, check against contactList
+        if (counter == 3)
+        {
+            counter = 0; // reset counter for next contact in .csv
+            bool duplicate = false;
+
+            // if tempContact is already in contactList, duplicate becomes true, and contact isn't added to contactlist.
+            for (int i = 0 && !duplicate; i < sizeof(contactList) / sizeof(ContactCard); i++)
+            {
+                if (tempContact == contactList[i]){
+                    duplicate = true;
+                }
+            }
+
+            if (!duplicate){
+
+            }
         }
     }
 
-    inFile.close();
+    inFile.close(); // closes .csv
     return 0;
 }
