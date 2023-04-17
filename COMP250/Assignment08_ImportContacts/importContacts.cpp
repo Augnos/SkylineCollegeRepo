@@ -1,6 +1,8 @@
 // Joshua Valdez
 // Assignment 8: Import Contacts
+#include <fstream>
 #include <iostream>
+
 using namespace std;
 
 /*
@@ -14,12 +16,13 @@ ContactCards to be equal.
 
 class ContactCard
 {
-private:
+  private:
     string name, emailAddress;
     long phoneNumber;
 
-public:
+  public:
     // constructor
+    ContactCard();
     ContactCard(string name, long phone, string email = "unknown")
     {
         this->name = name;
@@ -27,31 +30,42 @@ public:
         emailAddress = email;
     }
 
-    // getters/accessors
-    string getName() const{
+    // accessors
+    string getName() const
+    {
         return name;
     }
-    string getEmailAddress() const{
+    string getEmailAddress() const
+    {
         return emailAddress;
     }
-    long getPhoneNumber() const{
+    long getPhoneNumber() const
+    {
         return phoneNumber;
     }
 
-    // setters/mutators
-    void setName(string n){
-        name = n;
+    // mutators
+    void setName(string name)
+    {
+        this->name = name;
     }
-    void setEmailAddress(string e){
-        emailAddress = e;
+    void setPhoneNumber(long phone)
+    {
+        phoneNumber = phone;
     }
-    void setPhoneNumber(long p){
-        phoneNumber = p;
+    void setEmailAddress(string email)
+    {
+        emailAddress = email;
     }
 
-
+    // functions
     virtual void print();
-    bool operator==(const ContactCard &) const;
+
+    // operator overloads
+    bool operator==(const ContactCard &another) const
+    {
+        return name == another.name && (emailAddress == another.emailAddress || phoneNumber == another.phoneNumber);
+    }
 };
 
 void ContactCard::print()
@@ -59,11 +73,15 @@ void ContactCard::print()
     cout << "Name: " << name << " at " << emailAddress;
 }
 
-bool ContactCard::operator==(const ContactCard &another) const
+string trim(const string &input)
 {
-    return name == another.name && (emailAddress == another.emailAddress || phoneNumber == another.phoneNumber);
-}
+    string whiteSpaceChars = " \n\t";
+    int start = input.find_first_not_of(whiteSpaceChars);
+    int end = input.find_last_not_of(whiteSpaceChars);
 
+    int length = end - start + 1; // plus one so last character is included
+    return input.substr(start, length);
+}
 
 /*
 Part 1: ContactCard with phone number
@@ -88,5 +106,27 @@ print all the ContactCards.*/
 
 int main()
 {
+    ifstream inFile; // creates an object inFile of type ifstream
+
+    inFile.open("ContactData.csv");
+    string tempData;         // to hold a single value of a contact's data from .csv file
+    ContactCard tempContact(); // temp data stored here prior to being added to ContactList
+    string contactData[50];
+    int counter = 0;
+    while (getline(inFile, tempData, ','))
+    {
+        contactData[counter] = trim(tempData);
+        counter++;
+        if (counter % 3 == 0)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                cout << i << " data element is " << contactData[i] << endl;
+            }
+            counter = 0;
+        }
+    }
+
+    inFile.close();
     return 0;
 }
